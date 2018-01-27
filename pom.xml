@@ -73,6 +73,13 @@
                             <goal>revision</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>validate-the-git-infos</id>
+                        <goals>
+                            <goal>validateRevision</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
                 </executions>
 
                 <configuration>
@@ -89,6 +96,14 @@
                         <always>false</always>
                         <dirty>-dirty</dirty>
                     </gitDescribe>
+                    <validationProperties>
+                        <!-- verify that the current repository is not dirty -->
+                        <validationProperty>
+                            <name>validating git dirty</name>
+                            <value>${git.dirty}</value>
+                            <shouldMatchTo>false</shouldMatchTo>
+                        </validationProperty>
+                    </validationProperties>
 
                 </configuration>
 
